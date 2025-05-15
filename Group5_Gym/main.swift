@@ -7,5 +7,5 @@
 
 import Foundation
 
-print("Hello, World!")
+print("Group5_Gym")
 
