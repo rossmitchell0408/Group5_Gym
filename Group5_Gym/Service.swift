@@ -7,8 +7,9 @@
 
 import Foundation
 
-class Service {
-    private var id: String
+class Service: isPurchasable {
+        
+    var id: String
     private var name: String
     private var fee: Int
     private var totalSessions: Int
@@ -45,10 +46,8 @@ class Service {
     func getKeywords() -> [String] {
         return keywords
     }
-}
-
-extension Service: CustomStringConvertible {
-    var description: String {
+    
+    func printReceipt() -> String {
         return "\(id)-\(name): Cost: $\(fee), Sessions: \(totalSessions)"
     }
 }
