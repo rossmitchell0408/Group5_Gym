@@ -8,6 +8,6 @@
 import Foundation
 
 protocol isPurchasable {
-    var id: String { get }
-    func printReceipt() -> String
+    var description: String { get }
+    func printReceipt(status: serviceStatus) -> String
 }

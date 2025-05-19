@@ -7,14 +7,14 @@
 
 import Foundation
 
-// TODO: Make personal training different from fitness
 class PersonalTraining: Service {
     private var trainer: String
     private var durationMinutes: Int
     
-    init(id: String, name: String, fee: Int, trainer: String, durationMinutes: Int) {
+    init(id: String, name: String, fee: Int, sessions: Int = 3, trainer: String, durationMinutes: Int) {
         self.trainer = trainer
         self.durationMinutes = durationMinutes
-        super.init(id: id, name: name, fee: fee)
+        super.init(id: id, name: name, fee: fee, sessions: sessions, type: "Personal")
+        super.addKeyword(keyword: trainer)
     }
 }

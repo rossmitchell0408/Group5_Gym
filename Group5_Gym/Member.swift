@@ -7,23 +7,18 @@
 
 import Foundation
 
-// TODO - Add some func or something to make receipt printouts easier, either here or in Service, not 100% sure yet
-// I'm just being lazy about it atm (:
-
 class Member {
     private var name: String
     private let id: String
     private var balance: Int
     private var bookedServices: [String: (sessionAttended: Int, service: Service)] = [:]
     
-    init(name: String, id: String) {
-        // TODO - Some functionality for randomly generated UUIDs
+    init(name: String, balance: Int = 100) {
         self.name = name
-        self.id = id
-        self.balance = 100
+        self.id = UUID.init().uuidString
+        self.balance = balance
     }
     
-    // TODO - Remove any getters that aren't needed at the end of everything
     func getName() -> String {
         return name
     }
@@ -34,54 +29,54 @@ class Member {
         return balance
     }
     
-    func bookService(service: Service) -> String {
+    func bookService(service: Service) {
         // If the service is already booked, check if the course has been completed
         if let memberService = bookedServices[service.getId()] {
             if memberService.sessionAttended != service.getSessions() {
                 // If the course is not complete, return the output string and exit the func early
-                return "You're currently enrolled in this course! You've attended \(memberService.sessionAttended) out of \(service.getSessions()) total sessions."
+                print (memberService.service.printReceipt(status: serviceStatus.alreadyEnrolled))
             }
         }
         // Check that the service can be afforded
-        if service.getFee() < balance {
-            return "You cannot afford this course. It costs \(service.getFee()) and you have \(balance)."
+        else if service.getFee() > balance {
+            print ("You cannot afford this course. It costs \(service.getFee()) credits and you have \(balance) credits.")
         } else {
             // Add the service to the dict of bookedServices and set sessionAttended to 0, then deduce the fee from balance
             bookedServices[service.getId()] = (sessionAttended: 0, service: service)
             balance -= service.getFee()
-            return "Congrats! You've just booked the \(service.getName()) class! It cost \(service.getFee()) and you have \(balance) remaining."
+            print (service.printReceipt(status: serviceStatus.booked))
         }
     }
     
-    func cancelService(id: String) -> String {
+    func cancelService(service: Service) {
         // Check if the service is already booked
-        if var memberService = bookedServices[id] {
+        if let memberService = bookedServices[service.getId()] {
             // Check if more than one session attended, or the course is completed
             if (memberService.sessionAttended > 1) || (memberService.sessionAttended == memberService.service.getSessions()) {
-                return "Sorry, you've either attended more than one session or completed this class. You are ineligible for a refund at this time."
+                print (memberService.service.printReceipt(status: serviceStatus.cantRefund))
             } else {
                 // If eligible for a refund, remove from bookedServices and refund the balance
                 bookedServices[id] = nil
                 balance += memberService.service.getFee()
-                return "You've been refunded \(memberService.service.getFee()) and your new balance is \(balance)."
+                print (memberService.service.printReceipt(status: serviceStatus.refunded))
             }
         } else {
-            return "You aren't enrolled in a service with that ID."
+            print ("You aren't enrolled in a service with that ID.")
         }
     }
     
-    func markAttendance(id: String) -> String {
+    func markAttendance(id: String) {
         // Check if the service is booked
         if let memberService = bookedServices[id] {
             // Increment sessions by one and then congratulate the member for completing the course or let them know how many sessions remain
             bookedServices[id]!.sessionAttended += 1
             if (memberService.sessionAttended+1 == memberService.service.getSessions()) {
-                return "Congrats on completing your course!"
+                print ("Congrats on completing your course!")
             } else {
-                return "Attendance marked. You have \(memberService.service.getSessions() - bookedServices[id]!.sessionAttended) courses left."
+                print ("Attendance marked. You have \(memberService.service.getSessions() - bookedServices[id]!.sessionAttended) sessions left.")
             }
         } else {
-            return "You aren't enrolled in a service with that ID."
+            print ("You aren't enrolled in a service with that ID.")
         }
     }
     
