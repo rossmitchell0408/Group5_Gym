@@ -11,6 +11,8 @@
 		32788A512DD6668100D1FAA3 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32788A502DD6668100D1FAA3 /* Service.swift */; };
 		32788A532DD66FD300D1FAA3 /* FitnessClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32788A522DD66FD300D1FAA3 /* FitnessClass.swift */; };
 		32788A552DD6725100D1FAA3 /* PersonalTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32788A542DD6725100D1FAA3 /* PersonalTraining.swift */; };
+		811B00012DDADEE9008A7B17 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811B00002DDADEE9008A7B17 /* Member.swift */; };
+		811BFFFF2DDADED8008A7B17 /* Gym.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BFFFE2DDADED8008A7B17 /* Gym.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +33,8 @@
 		32788A502DD6668100D1FAA3 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		32788A522DD66FD300D1FAA3 /* FitnessClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessClass.swift; sourceTree = "<group>"; };
 		32788A542DD6725100D1FAA3 /* PersonalTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTraining.swift; sourceTree = "<group>"; };
+		811B00002DDADEE9008A7B17 /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		811BFFFE2DDADED8008A7B17 /* Gym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gym.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 		32788A382DD6564000D1FAA3 /* Group5_Gym */ = {
 			isa = PBXGroup;
 			children = (
+				811B00002DDADEE9008A7B17 /* Member.swift */,
+				811BFFFE2DDADED8008A7B17 /* Gym.swift */,
 				32788A392DD6564000D1FAA3 /* main.swift */,
 				32788A502DD6668100D1FAA3 /* Service.swift */,
 				32788A522DD66FD300D1FAA3 /* FitnessClass.swift */,
@@ -130,8 +136,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				32788A3A2DD6564000D1FAA3 /* main.swift in Sources */,
+				811B00012DDADEE9008A7B17 /* Member.swift in Sources */,
 				32788A552DD6725100D1FAA3 /* PersonalTraining.swift in Sources */,
 				32788A512DD6668100D1FAA3 /* Service.swift in Sources */,
+				811BFFFF2DDADED8008A7B17 /* Gym.swift in Sources */,
 				32788A532DD66FD300D1FAA3 /* FitnessClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
