@@ -12,11 +12,11 @@ import Foundation
 
 class Member {
     private var name: String
-    private let id: Int
+    private let id: String
     private var balance: Int
     private var bookedServices: [String: (sessionAttended: Int, service: Service)] = [:]
     
-    init(name: String, id: Int) {
+    init(name: String, id: String) {
         // TODO - Some functionality for randomly generated UUIDs
         self.name = name
         self.id = id
@@ -27,7 +27,7 @@ class Member {
     func getName() -> String {
         return name
     }
-    func getId() -> Int {
+    func getId() -> String {
         return id
     }
     func getBalance() -> Int {
