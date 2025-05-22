@@ -28,6 +28,13 @@ class Member {
     func getBalance() -> Int {
         return balance
     }
+    func getBookedServices() -> [Service] {
+        var services: [Service] = []
+        for (_, value) in bookedServices {
+            services.append(value.service)
+        }
+        return services
+    }
     
     func bookService(service: Service) {
         // If the service is already booked, check if the course has been completed
