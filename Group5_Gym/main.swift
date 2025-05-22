@@ -104,10 +104,12 @@ func runMember() {
     case "1":
         print("How many credits would you like to load?")
         let credits = Int(readLine()!) ?? 0
-        if (credits != 0) {
+        if (credits <= 0) {
+            print("You must enter a postive value to reload.")
+        } else if (credits > 0) {
             member.addBalance(num: credits)
+            print("You now have \(String(describing: member.getBalance())) credits")
         }
-        print("You now have \(String(describing: member.getBalance())) credits")
         break
     case "2":
         print("Please enter a key word to search")
@@ -179,7 +181,7 @@ func runOwner() {
         if (service == nil) {
             break
         }
-        print(service!)
+        print(service!.longDesc)
         print("Is this correct? 1: Yes 0: No")
         let answer = readLine()
         if (answer == "1") {
@@ -228,15 +230,16 @@ func createService() -> Service? {
         name = readLine()
         print("Enter fee")
         fee = Int(readLine()!) ?? 0
-        print("Enter number of sessions")
-        sessions = Int(readLine()!) ?? 0
+        print("Enter number of sessions (Default 7)")
+        sessions = Int(readLine()!) ?? 7
         print("Enter activity")
         activity = readLine()
         id = createRandomId()
-        if (name == nil || fee == 0 || sessions == 0 || activity == nil) {
+        if (name == nil || fee <= 0 || activity == nil) {
+            print("Please fill all required fields.")
             break
         }
-        service = FitnessClass(id: id, name: name!, fee: fee, activity: activity!)
+        service = FitnessClass(id: id, name: name!, fee: fee, sessions: sessions, activity: activity!)
         print("Adding service")
         break
     case "2":
@@ -244,17 +247,18 @@ func createService() -> Service? {
         name = readLine()
         print("Enter fee")
         fee = Int(readLine()!) ?? 0
-        print("Enter number of sessions")
-        sessions = Int(readLine()!) ?? 0
+        print("Enter number of sessions (Default 3)")
+        sessions = Int(readLine()!) ?? 3
         print("Enter Trainer")
         trainer = readLine()
         print("Enter Duration in minutes")
         minutes = Int(readLine()!) ?? 0
         id = createRandomId()
-        if (name == nil || fee == 0 || sessions == 0 || trainer == nil || minutes == 0) {
+        if (name == nil || fee <= 0 || trainer == nil || minutes <= 0) {
+            print("Please fill all required fields.")
             break
         }
-        service = PersonalTraining(id: id, name: name!, fee: fee,  trainer: trainer!, durationMinutes: minutes)
+        service = PersonalTraining(id: id, name: name!, fee: fee, sessions: sessions, trainer: trainer!, durationMinutes: minutes)
         print("Adding service")
         break
     case "0":

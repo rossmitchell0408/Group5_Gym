@@ -20,7 +20,7 @@ class Gym {
     func listServices() {
         print("Listing all services:")
         for service in services{
-            print("\(service.description)")
+            print("\(service.longDesc)")
         }
     }
     func search(keyword: String?) -> [Service]? {
