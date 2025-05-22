@@ -31,7 +31,7 @@ class Gym {
             return nil
         }
         for service in services {
-            if (service.getName() == keyword) {
+            if (service.getName().lowercased() == keyword!.lowercased()) {
                 results.append(service)
             } else if (checkKeywords(keyword: keyword!, keywords: service.getKeywords())) {
                 results.append(service)
@@ -41,7 +41,7 @@ class Gym {
     }
     private func checkKeywords(keyword: String, keywords: [String]) -> Bool {
         for word in keywords {
-            if (word == keyword) {
+            if (word.lowercased() == keyword.lowercased()) {
                 return true
             }
         }

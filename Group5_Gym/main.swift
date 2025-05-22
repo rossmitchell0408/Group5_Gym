@@ -17,8 +17,8 @@ print("Group5_Gym")
 var setupServices = [
     PersonalTraining(id: createRandomId(), name: "Lifting", fee: 100, trainer: "Tim", durationMinutes: 40),
     FitnessClass(id: createRandomId(), name: "Intermediate Swim", fee: 110, activity: "Swimming"),
-    PersonalTraining(id: createRandomId(), name: "Couch to 10K", fee: 80,trainer: "Lisa", durationMinutes: 60),
-    FitnessClass(id: createRandomId(), name: "Yoga", fee: 105, sessions: 5, activity: "Yoga Class")
+    PersonalTraining(id: createRandomId(), name: "Couch to 10K", fee: 80, sessions: 9, trainer: "Lisa", durationMinutes: 60),
+    FitnessClass(id: createRandomId(), name: "Yoga", fee: 95, sessions: 1, activity: "Yoga Class")
 ]
 var gym = Gym()
 gym.addService(service: setupServices)
@@ -97,7 +97,7 @@ func login() -> String? {
 
 // This function contains all the choises presented to a Member of the Gym
 func runMember() {
-    print("Welcome \(member.getName())")
+    print("Welcome \(member.getName()) - Current Credits: \(member.getBalance())")
     print("Would you like to...\n1: Reload Credits\n2: Search for a service\n3: Attend a session\n4: Cancel a service\n0: Log out")
     let input = readLine()
     switch input {
@@ -107,7 +107,7 @@ func runMember() {
         if (credits != 0) {
             member.addBalance(num: credits)
         }
-        print("You new have \(String(describing: member.getBalance())) credits")
+        print("You now have \(String(describing: member.getBalance())) credits")
         break
     case "2":
         print("Please enter a key word to search")
@@ -118,7 +118,7 @@ func runMember() {
         } else {
             for i in 0...results!.count - 1 {
 
-                print("Press \(i + 1) to sign up for \(results![i].description)")
+                print("Press \(i + 1) to sign up for \(results![i])")
             }
             print("Press 0 to return")
             let selection = Int(readLine()!) ?? 0
@@ -139,7 +139,7 @@ func runMember() {
         }
         print("Press 0 to cancel")
         let serviceIndex = Int(readLine()!) ?? 0
-        if (Int(serviceIndex) > 0 || Int(serviceIndex) <= services.count) {
+        if (Int(serviceIndex) > 0 && Int(serviceIndex) <= services.count) {
             member.markAttendance(id: services[serviceIndex - 1].getId())
         }
         break
@@ -179,7 +179,7 @@ func runOwner() {
         if (service == nil) {
             break
         }
-        print(service!.description)
+        print(service!)
         print("Is this correct? 1: Yes 0: No")
         let answer = readLine()
         if (answer == "1") {
@@ -194,7 +194,7 @@ func runOwner() {
             print("Could not find anything.")
         } else {
             for service in results! {
-                print(service.description)
+                print(service)
             }
         }
         break

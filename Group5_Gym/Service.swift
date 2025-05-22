@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Service: isPurchasable {
+class Service: isPurchasable, CustomStringConvertible {
     private var id: String
     private var name: String
     private var fee: Int
@@ -15,7 +15,7 @@ class Service: isPurchasable {
     private var keywords: [String] = []
     private var type: String?
     var description: String {
-        return (type != nil ? type! + " " : "") + id + " " + name
+        "\(type != nil ? type! + ":" : "Class:") \(name) - Fee: \(fee) - ID: \(id)"
     }
     
     init(id: String, name: String, fee: Int, sessions: Int, type: String? = nil) {

@@ -42,6 +42,11 @@ class Member {
             if memberService.sessionAttended != service.getSessions() {
                 // If the course is not complete, return the output string and exit the func early
                 print (memberService.service.printReceipt(status: serviceStatus.alreadyEnrolled))
+            } else {
+                // Add the service to the dict of bookedServices and set sessionAttended to 0, then deduce the fee from balance
+                bookedServices[service.getId()] = (sessionAttended: 0, service: service)
+                balance -= service.getFee()
+                print (service.printReceipt(status: serviceStatus.booked))
             }
         }
         // Check that the service can be afforded
@@ -63,7 +68,7 @@ class Member {
                 print (memberService.service.printReceipt(status: serviceStatus.cantRefund))
             } else {
                 // If eligible for a refund, remove from bookedServices and refund the balance
-                bookedServices[id] = nil
+                bookedServices.removeValue(forKey:service.getId())
                 balance += memberService.service.getFee()
                 print (memberService.service.printReceipt(status: serviceStatus.refunded))
             }
@@ -75,6 +80,10 @@ class Member {
     func markAttendance(id: String) {
         // Check if the service is booked
         if let memberService = bookedServices[id] {
+            if (memberService.sessionAttended == memberService.service.getSessions()) {
+                print ("You've already completed this course!")
+                return
+            }
             // Increment sessions by one and then congratulate the member for completing the course or let them know how many sessions remain
             bookedServices[id]!.sessionAttended += 1
             if (memberService.sessionAttended+1 == memberService.service.getSessions()) {
