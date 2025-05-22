@@ -135,12 +135,12 @@ func runMember() {
             return
         }
         for i in 0...services.count - 1 {
-            print("Press \(i + 1) to attend \(services[i])")
+            print("Press \(i + 1) to attend \(services[i].service.shortDesc) (\(services[i].sessionAttended)/\(services[i].service.getSessions()) sessions)")
         }
         print("Press 0 to cancel")
         let serviceIndex = Int(readLine()!) ?? 0
         if (Int(serviceIndex) > 0 && Int(serviceIndex) <= services.count) {
-            member.markAttendance(id: services[serviceIndex - 1].getId())
+            member.markAttendance(id: services[serviceIndex - 1].service.getId())
         }
         break
     case "4":
@@ -151,13 +151,13 @@ func runMember() {
             return
         }
         for i in 0...services.count - 1 {
-            print("Press \(i + 1) to cancel \(services[i])")
+            print("Press \(i + 1) to cancel \(services[i].service.shortDesc) (\(services[i].sessionAttended)/\(services[i].service.getSessions()) sessions)")
         }
         print("Press 0 to return")
         let serviceInput = readLine()
         let serviceIndex = Int(serviceInput!) ?? 0
-        if (Int(serviceIndex) > 0 || Int(serviceIndex) <= services.count) {
-            member.cancelService(service: services[serviceIndex - 1])
+        if (Int(serviceIndex) > 0 && Int(serviceIndex) <= services.count) {
+            member.cancelService(service: services[serviceIndex - 1].service)
         }
         break
     case "0":

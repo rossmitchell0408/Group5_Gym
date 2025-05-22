@@ -28,10 +28,10 @@ class Member {
     func getBalance() -> Int {
         return balance
     }
-    func getBookedServices() -> [Service] {
-        var services: [Service] = []
+    func getBookedServices() -> [(sessionAttended: Int, service: Service)] {
+        var services: [(sessionAttended: Int, service: Service)] = []
         for (_, value) in bookedServices {
-            services.append(value.service)
+            services.append(value)
         }
         return services
     }

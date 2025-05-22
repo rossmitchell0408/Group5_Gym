@@ -15,7 +15,15 @@ class Service: isPurchasable, CustomStringConvertible {
     private var keywords: [String] = []
     private var type: String?
     var description: String {
-        "\(type != nil ? type! + ":" : "Class:") \(name) - Fee: \(fee) - ID: \(id)"
+        "\(self.shortDesc) - Fee: \(fee) - ID: \(id)"
+    }
+    
+    var shortDesc: String {
+        "\(type != nil ? type! + " " : "")Class: \(name)"
+    }
+    
+    var longDesc: String {
+        "\(self.description) - Sessions: \(totalSessions) - Keywords: \(keywords)"
     }
     
     init(id: String, name: String, fee: Int, sessions: Int, type: String? = nil) {
@@ -52,9 +60,9 @@ class Service: isPurchasable, CustomStringConvertible {
     func printReceipt(status: serviceStatus) -> String {
         switch status {
         case .booked:
-            "Congrats on enrolling for the \(description) class! It cost \(fee) credits."
+            "Congrats on enrolling for the \(shortDesc) class! It cost \(fee) credits."
         case .refunded:
-            "You've successfully cancelled your enrollment in the \(description) class. Refunding \(fee) credits to your account."
+            "You've successfully cancelled your enrollment in the \(shortDesc) class. Refunding \(fee) credits to your account."
         case .alreadyEnrolled:
             "You're currently enrolled in this class! You can't register for the same course again before completing it."
         case .cantRefund:
